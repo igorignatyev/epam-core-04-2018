@@ -28,7 +28,7 @@ public class Task5 {
      */
     public static void main(String[] args) {
 
-        String vowelsArray = "aeiouy";
+        String vowelsArray = "aeiouyAEIOUY";
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
         int countWordsWithSameNumVowelsAndConsonants = 0;
@@ -41,6 +41,7 @@ public class Task5 {
             boolean isLatin = true;
             int vowels = 0;
             int consonants = 0;
+
             for (char c : currentCharArray) {
                 if (!((int)c >= 65 && (int)c <= 90 || (int)c >= 97 && (int)c <= 122)) {
                     isLatin = false;
@@ -56,8 +57,8 @@ public class Task5 {
             if (isLatin && vowels == consonants) {
                 ++countWordsWithSameNumVowelsAndConsonants;
             }
-
         }
+
         System.out.println(countWordsWithSameNumVowelsAndConsonants);
     }
 }
