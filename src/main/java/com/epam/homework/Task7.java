@@ -52,12 +52,13 @@ public class Task7 {
 
     private static boolean isUniqueLatinLettered(String word){
         HashSet<Character> charsInCurrentWord = new HashSet<>();
-        for (int i = 0; i < word.length(); i++){
-            char currentChar = word.charAt(i);
+        String temporaryWord = word.toLowerCase();
+        for (int i = 0; i < temporaryWord.length(); i++){
+            char currentChar = temporaryWord.charAt(i);
             if (currentChar >= 'a' && currentChar <= 'z' || currentChar >= 'A' && currentChar <= 'Z') {
                 charsInCurrentWord.add(currentChar);
             }
         }
-        return charsInCurrentWord.size() == word.length();
+        return charsInCurrentWord.size() == temporaryWord.length();
     }
 }
