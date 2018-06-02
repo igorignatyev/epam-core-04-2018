@@ -1,5 +1,9 @@
 package com.epam.homework;
 
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Scanner;
+
 public class Task7 {
 
     /**
@@ -28,6 +32,29 @@ public class Task7 {
      * The is a
      */
     public static void main(String[] args) {
-        // TODO реализация
+        Scanner scanner = new Scanner(System.in);
+        int numberOfWords = scanner.nextInt();
+        LinkedHashSet<String> uniqueLetteredWords = new LinkedHashSet<>();
+        for (int i = 0; i < numberOfWords; i++){
+            String currentWord = scanner.next();
+            if (isUniqueLettered(currentWord)) {
+                uniqueLetteredWords.add(currentWord);
+            }
+        }
+        if (uniqueLetteredWords.isEmpty()) {
+            System.out.println("NOT FOUND");
+            return;
+        }
+        for (String word: uniqueLetteredWords) {
+            System.out.print(word + " ");
+        }
+    }
+
+    private static boolean isUniqueLettered(String word){
+        HashSet<Character> charsInCurrentWord = new HashSet<>();
+        for (int i = 0; i < word.length(); i++){
+            charsInCurrentWord.add(word.charAt(i));
+        }
+        return charsInCurrentWord.size() == word.length();
     }
 }
