@@ -50,7 +50,7 @@ public class Task6 {
         System.out.println("NOT FOUND");
     }
 
-    public static boolean isSequence (String word){
+    public static boolean isSequence(String word){
         for (int i = 0; i < word.length() - 1; i++){
             if (word.charAt(i) >= word.charAt(i+1)){
                 return false;
