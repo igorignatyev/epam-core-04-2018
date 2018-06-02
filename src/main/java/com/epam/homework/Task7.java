@@ -37,7 +37,7 @@ public class Task7 {
         LinkedHashSet<String> uniqueLetteredWords = new LinkedHashSet<>();
         for (int i = 0; i < numberOfWords; i++){
             String currentWord = scanner.next();
-            if (isUniqueLettered(currentWord)) {
+            if (isUniqueLatinLettered(currentWord)) {
                 uniqueLetteredWords.add(currentWord);
             }
         }
@@ -50,10 +50,13 @@ public class Task7 {
         }
     }
 
-    private static boolean isUniqueLettered(String word){
+    private static boolean isUniqueLatinLettered(String word){
         HashSet<Character> charsInCurrentWord = new HashSet<>();
         for (int i = 0; i < word.length(); i++){
-            charsInCurrentWord.add(word.charAt(i));
+            char currentChar = word.charAt(i);
+            if (currentChar >= 'a' && currentChar <= 'z' || currentChar >= 'A' && currentChar <= 'Z') {
+                charsInCurrentWord.add(currentChar);
+            }
         }
         return charsInCurrentWord.size() == word.length();
     }
