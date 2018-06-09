@@ -47,7 +47,9 @@ public class Task12 {
         int[][] matrix = readMatrix(scanner, dimension);
         int column = scanner.nextInt();
 
-        sortRowsForColumn(matrix, column);
+        Arrays.sort(matrix, Comparator.comparingInt(o -> o[column]));
+
+        System.out.println(dimension);
         for (int row = 0; row < dimension; ++row) {
             for (int col = 0; col < dimension; ++col) {
                 System.out.print(matrix[row][col] + " ");
@@ -67,8 +69,4 @@ public class Task12 {
         return matrix;
     }
 
-    private static void sortRowsForColumn(int[][] matrix, int col){
-        Comparator<int[]> comparator = Comparator.comparingInt(o -> o[col]);
-        Arrays.sort(matrix, comparator);
-    }
 }
