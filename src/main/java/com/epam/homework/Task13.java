@@ -1,5 +1,7 @@
 package com.epam.homework;
 
+import java.util.*;
+
 public class Task13 {
 
     /**
@@ -50,6 +52,37 @@ public class Task13 {
      * 0  -1   2
      */
     public static void main(String[] args) {
-        // TODO реализация
+
+        Scanner scanner = new Scanner(System.in);
+        int dimension = scanner.nextInt();
+        int[][] matrix = readMatrix(scanner, dimension);
+
+        int shift = scanner.nextInt();
+        shift %= dimension;
+        if (shift < 0) shift += dimension;
+        System.out.println(shift);
+     
+        int[][] finalMatrix = new int[dimension][dimension];
+        System.arraycopy(matrix, dimension - shift, finalMatrix, 0, shift);
+        System.arraycopy(matrix, 0, finalMatrix, shift, dimension - shift);
+
+        System.out.println(dimension);
+        for (int row = 0; row < dimension; ++row) {
+            for (int col = 0; col < dimension; ++col) {
+                System.out.print(finalMatrix[row][col] + " ");
+            }
+            System.out.println();
+        }
+
+    }
+
+    private static int[][] readMatrix(Scanner scanner, int dimension) {
+        int[][] matrix = new int[dimension][dimension];
+        for (int row = 0; row < dimension; ++row) {
+            for (int col = 0; col < dimension; ++col) {
+                matrix[row][col] = scanner.nextInt();
+            }
+        }
+        return matrix;
     }
 }
