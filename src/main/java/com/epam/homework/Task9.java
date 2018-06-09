@@ -1,5 +1,10 @@
 package com.epam.homework;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
+import java.util.Scanner;
+
 public class Task9 {
 
     /**
@@ -47,6 +52,30 @@ public class Task9 {
      * NO ROOTS
      */
     public static void main(String[] args) {
-        // TODO реализация
+
+        Scanner scanner = new Scanner(System.in);
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+        int c = scanner.nextInt();
+
+        double discriminant = b*b - 4*a*c;
+
+        DecimalFormatSymbols decimalFormatSymbols = new DecimalFormatSymbols(Locale.UK);
+        DecimalFormat rootFormat = new DecimalFormat("#0.00", decimalFormatSymbols);
+
+        switch (Double.compare(discriminant, 0)) {
+            case 1:
+                double x1 = (-b - Math.sqrt(discriminant))/2/a;
+                double x2 = (-b + Math.sqrt(discriminant))/2/a;
+                System.out.println(rootFormat.format(x1) + ", " + rootFormat.format(x2));
+                break;
+            case 0:
+                double x = -b/2/a;
+                System.out.println(rootFormat.format(x));
+                break;
+            case -1:
+                System.out.println("NO ROOTS");
+        }
+
     }
 }
