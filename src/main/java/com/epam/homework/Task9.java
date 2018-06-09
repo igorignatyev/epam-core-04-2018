@@ -70,7 +70,7 @@ public class Task9 {
                 System.out.println(rootFormat.format(x1) + ", " + rootFormat.format(x2));
                 break;
             case 0:
-                double x = -b/2/a;
+                double x = -(double)b/2/a;
                 System.out.println(rootFormat.format(x));
                 break;
             case -1:
