@@ -41,6 +41,6 @@ public class Task10 {
     }
 
     private static boolean isPowerOfTwo (int value){
-        return (value ^ (value - 1)) == value * 2 - 1;
+        return (value > 0) & ((value ^ (value - 1)) == value * 2 - 1);
     }
 }
