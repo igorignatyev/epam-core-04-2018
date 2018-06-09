@@ -1,5 +1,9 @@
 package com.epam.homework;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Scanner;
+
 public class Task12 {
 
     /**
@@ -37,6 +41,34 @@ public class Task12 {
      * 0    2    3    4    5
      */
     public static void main(String[] args) {
-        // TODO реализация
+
+        Scanner scanner = new Scanner(System.in);
+        int dimension = scanner.nextInt();
+        int[][] matrix = readMatrix(scanner, dimension);
+        int column = scanner.nextInt();
+
+        sortRowsForColumn(matrix, column);
+        for (int row = 0; row < dimension; ++row) {
+            for (int col = 0; col < dimension; ++col) {
+                System.out.print(matrix[row][col] + " ");
+            }
+            System.out.println();
+        }
+
+    }
+
+    private static int[][] readMatrix(Scanner scanner, int dimension) {
+        int[][] matrix = new int[dimension][dimension];
+        for (int row = 0; row < dimension; ++row) {
+            for (int col = 0; col < dimension; ++col) {
+                matrix[row][col] = scanner.nextInt();
+            }
+        }
+        return matrix;
+    }
+
+    private static void sortRowsForColumn(int[][] matrix, int col){
+        Comparator<int[]> comparator = Comparator.comparingInt(o -> o[col]);
+        Arrays.sort(matrix, comparator);
     }
 }
