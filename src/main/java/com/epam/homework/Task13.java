@@ -60,7 +60,6 @@ public class Task13 {
         int shift = scanner.nextInt();
         shift %= dimension;
         if (shift < 0) shift += dimension;
-        System.out.println(shift);
      
         int[][] finalMatrix = new int[dimension][dimension];
         System.arraycopy(matrix, dimension - shift, finalMatrix, 0, shift);
