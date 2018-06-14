@@ -68,18 +68,7 @@ public class Task16 {
         int[][] matrix = readMatrix(scanner, dimension);
         int degrees = scanner.nextInt();
 
-        degrees %= 4;
-        if (degrees < 0) degrees += 4;
-
-        matrix = rotatedMatrix(matrix, degrees);
-
-        System.out.println(dimension);
-        for (int row = 0; row < dimension; ++row) {
-            for (int col = 0; col < dimension; ++col) {
-                System.out.print(matrix[row][col] + " ");
-            }
-            System.out.println();
-        }
+        printMatrix(rotatedMatrix(matrix, degrees));
 
     }
 
@@ -93,10 +82,24 @@ public class Task16 {
         return matrix;
     }
 
+    private static void printMatrix(int[][] matrix){
+        int dimension = matrix.length;
+        System.out.println(dimension);
+        for (int row = 0; row < dimension; ++row) {
+            for (int col = 0; col < dimension; ++col) {
+                System.out.print(matrix[row][col] + " ");
+            }
+            System.out.println();
+        }
+    }
+
     private static int[][] rotatedMatrix(int[][] matrix, int degrees){
 
-        int dimension = matrix[0].length;
+        int dimension = matrix.length;
         int[][] newMatrix = new int[dimension][dimension];
+
+        degrees %= 4;
+        if (degrees < 0) degrees += 4;
 
         switch(degrees){
             case 0:
