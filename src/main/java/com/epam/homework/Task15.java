@@ -65,7 +65,9 @@ public class Task15 {
                         firstPositiveFound = true;
                     }
                 } else {
-                    currentSum += matrix[i][j];
+                    if (firstPositiveFound) {
+                        currentSum += matrix[i][j];
+                    }
                 }
             }
         }
