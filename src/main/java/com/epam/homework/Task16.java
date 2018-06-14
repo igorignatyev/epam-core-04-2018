@@ -1,5 +1,7 @@
 package com.epam.homework;
 
+import java.util.Scanner;
+
 public class Task16 {
 
     /**
@@ -60,6 +62,69 @@ public class Task16 {
      * 3 9
      */
     public static void main(String[] args) {
-        // TODO реализация
+
+        Scanner scanner = new Scanner(System.in);
+        int dimension = scanner.nextInt();
+        int[][] matrix = readMatrix(scanner, dimension);
+        int degrees = scanner.nextInt();
+
+        degrees %= 4;
+        if (degrees < 0) degrees += 4;
+
+        matrix = rotatedMatrix(matrix, degrees);
+
+        System.out.println(dimension);
+        for (int row = 0; row < dimension; ++row) {
+            for (int col = 0; col < dimension; ++col) {
+                System.out.print(matrix[row][col] + " ");
+            }
+            System.out.println();
+        }
+
     }
+
+    private static int[][] readMatrix(Scanner scanner, int dimension) {
+        int[][] matrix = new int[dimension][dimension];
+        for (int row = 0; row < dimension; ++row) {
+            for (int col = 0; col < dimension; ++col) {
+                matrix[row][col] = scanner.nextInt();
+            }
+        }
+        return matrix;
+    }
+
+    private static int[][] rotatedMatrix(int[][] matrix, int degrees){
+
+        int dimension = matrix[0].length;
+        int[][] newMatrix = new int[dimension][dimension];
+
+        switch(degrees){
+            case 0:
+                break;
+            case 1:
+                for (int i = 0; i < dimension; i++){
+                    for (int j = 0; j < dimension; j++){
+                        newMatrix[j][dimension - i - 1] = matrix[i][j];
+                    }
+                }
+                break;
+            case 2:
+                for (int i = 0; i < dimension; i++) {
+                    for (int j = 0; j < dimension; j++) {
+                        newMatrix[dimension - i - 1][dimension - j - 1] = matrix[i][j];
+                    }
+                }
+                break;
+            case 3:
+                for (int i = 0; i < dimension; i++) {
+                    for (int j = 0; j < dimension; j++) {
+                        newMatrix[dimension - j - 1][i] = matrix[i][j];
+                    }
+                }
+        }
+
+        return newMatrix;
+
+    }
+
 }
