@@ -1,5 +1,8 @@
 package com.epam.homework;
 
+import java.util.HashSet;
+import java.util.Scanner;
+
 public class Task19 {
 
     /**
@@ -36,6 +39,82 @@ public class Task19 {
      * -3  1
      */
     public static void main(String[] args) {
-        // TODO реализация
+
+        Scanner scanner = new Scanner(System.in);
+        int[][] matrix = readMatrix(scanner);
+
+        printMatrix(discardRowsAndColsFilledWithZeros(matrix));
+
+    }
+
+    private static int[][] readMatrix(Scanner scanner) {
+        int dimension = scanner.nextInt();
+        int[][] matrix = new int[dimension][dimension];
+        for (int row = 0; row < dimension; ++row) {
+            for (int col = 0; col < dimension; ++col) {
+                matrix[row][col] = scanner.nextInt();
+            }
+        }
+        return matrix;
+    }
+
+    private static void printMatrix(int[][] matrix){
+        int vertical = matrix.length;
+        int horizontal = matrix[0].length;
+        System.out.println(vertical);
+        System.out.println(horizontal);
+        for (int row = 0; row < vertical; ++row) {
+            for (int col = 0; col < horizontal; ++col) {
+                System.out.print(matrix[row][col] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    private static int[][] discardRowsAndColsFilledWithZeros(int[][] matrix){
+
+        int dimension = matrix.length;
+        HashSet<Integer> rowsToDiscard = new HashSet<>();
+        HashSet<Integer> colsToDiscard = new HashSet<>();
+
+        for (int i = 0; i < dimension; i++){
+            int zerosRow = 0;
+            int zerosCol = 0;
+            for (int j = 0; j < dimension; j++) {
+                if (matrix[i][j] == 0){
+                    zerosRow++;
+                }
+                if (matrix[j][i] == 0){
+                    zerosCol++;
+                }
+            }
+            if (zerosRow == dimension) {
+                rowsToDiscard.add(i);
+            }
+            if (zerosCol == dimension){
+                colsToDiscard.add(i);
+            }
+        }
+
+        int[][] newMatrix = new int[dimension - rowsToDiscard.size()][dimension - colsToDiscard.size()];
+
+        int iNew = 0;
+        int jNew = 0;
+
+        for (int i = 0; i < dimension; i++){
+            if (!rowsToDiscard.contains(i)) {
+                jNew = 0;
+                for (int j = 0; j < dimension; j++) {
+                    if (!colsToDiscard.contains(j)){
+                        newMatrix[iNew][jNew] = matrix[i][j];
+                        jNew++;
+                    }
+                }
+                iNew++;
+            }
+        }
+
+        return newMatrix;
+
     }
 }
