@@ -107,21 +107,21 @@ public class Task16 {
             case 1:
                 for (int i = 0; i < dimension; i++){
                     for (int j = 0; j < dimension; j++){
-                        newMatrix[j][dimension - i - 1] = matrix[i][j];
+                        newMatrix[i][j] = matrix[dimension - j - 1][i];
                     }
                 }
                 break;
             case 2:
                 for (int i = 0; i < dimension; i++) {
                     for (int j = 0; j < dimension; j++) {
-                        newMatrix[dimension - i - 1][dimension - j - 1] = matrix[i][j];
+                        newMatrix[i][j] = matrix[dimension - i - 1][dimension - j - 1];
                     }
                 }
                 break;
             case 3:
                 for (int i = 0; i < dimension; i++) {
                     for (int j = 0; j < dimension; j++) {
-                        newMatrix[dimension - j - 1][i] = matrix[i][j];
+                        newMatrix[i][j] = matrix[j][dimension - i - 1];
                     }
                 }
         }
