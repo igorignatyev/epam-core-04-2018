@@ -74,35 +74,17 @@ public class Task20 {
     private static void shiftRows(int[][] matrix, int fromRow, int toRow) {
 
         int[] tempRow = matrix[fromRow];
-
-        if (toRow > fromRow) {
-            System.arraycopy(matrix, fromRow + 1, matrix, fromRow, toRow - fromRow);
-        } else {
-            System.arraycopy(matrix, toRow, matrix, toRow + 1, fromRow - toRow);
-        }
+        matrix[fromRow] = matrix[toRow];
         matrix[toRow] = tempRow;
 
     }
 
     private static void shiftCols(int[][] matrix, int fromCol, int toCol) {
 
-        int dimension = matrix.length;
-        int[] tempCol = new int[dimension];
-        for (int i = 0; i < dimension; i++) {
-            tempCol[i] = matrix[i][fromCol];
-        }
-
-        if (toCol > fromCol) {
-            for (int i = 0; i < dimension; i++) {
-                System.arraycopy(matrix[i], fromCol + 1, matrix[i], fromCol, toCol - fromCol);
-            }
-        } else {
-            for (int i = 0; i < dimension; i++) {
-                System.arraycopy(matrix[i], toCol, matrix[i], toCol + 1, fromCol - toCol);
-            }
-        }
-        for (int i = 0; i < dimension; i++) {
-            matrix[i][toCol] = tempCol[i];
+        for (int[] row : matrix) {
+            int tempElement = row[fromCol];
+            row[fromCol] = row[toCol];
+            row[toCol] = tempElement;
         }
 
     }
