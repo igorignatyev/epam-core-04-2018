@@ -34,7 +34,7 @@ public class Task25Impl implements Task25 {
             }
         }
 
-        return brackets.empty();
+        return brackets.isEmpty();
 
     }
 
