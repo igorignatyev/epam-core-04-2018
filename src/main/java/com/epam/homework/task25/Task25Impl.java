@@ -14,7 +14,7 @@ public class Task25Impl implements Task25 {
                 case '(':
                 case '[':
                 case '{':
-                    brackets.add(c);
+                    brackets.push(c);
                     break;
                 case ')':
                     if (!"(".equals(brackets.pop().toString())) {
@@ -33,7 +33,7 @@ public class Task25Impl implements Task25 {
                     break;
             }
         }
-        
+
         return brackets.empty();
 
     }
