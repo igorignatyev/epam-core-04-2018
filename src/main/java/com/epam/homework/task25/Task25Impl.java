@@ -17,17 +17,17 @@ public class Task25Impl implements Task25 {
                     brackets.push(c);
                     break;
                 case ')':
-                    if (!"(".equals(brackets.pop().toString())) {
+                    if (brackets.isEmpty() || !"(".equals(brackets.pop().toString())) {
                         return false;
                     }
                     break;
                 case ']':
-                    if (!"[".equals(brackets.pop().toString())) {
+                    if (brackets.isEmpty() || !"[".equals(brackets.pop().toString())) {
                         return false;
                     }
                     break;
                 case '}':
-                    if (!"{".equals(brackets.pop().toString())) {
+                    if (brackets.isEmpty() || !"{".equals(brackets.pop().toString())) {
                         return false;
                     }
                     break;
