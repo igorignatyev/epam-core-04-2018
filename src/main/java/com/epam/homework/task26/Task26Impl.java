@@ -7,27 +7,29 @@ public class Task26Impl implements Task26 {
     @Override
     public Set<I2DPoint> analyze(Set<ISegment> segments) {
 
-        Map<ISegment, Set<I2DPoint>> intersections = new TreeMap<>(Comparator.comparingDouble(o -> o.first().getX()));
+        Map<ISegment, Set<I2DPoint>> intersections = new TreeMap<>(Comparator.comparingLong(Object::hashCode));
 
+        double minX = Double.MAX_VALUE;
         Iterator<ISegment> iter = segments.iterator();
+        int outerCount = 0;
+
         while (iter.hasNext()) {
             ISegment segment = iter.next();
             Set<I2DPoint> pointsOfIntersections = new HashSet<>();
-            iter.forEachRemaining(anotherSegment -> {
-                if (doIntersect(segment, anotherSegment)) {
-                    I2DPoint pointOfIntersection = intersection(segment, anotherSegment);
+            Iterator<ISegment> jter = segments.iterator();
+            int innerCount = 0;
+            while (jter.hasNext()) {
+                ISegment anotherSegment = jter.next();
+                if (innerCount++ > outerCount && doIntersect(segment, anotherSegment)) {
+                    I2DPoint pointOfIntersection = getIntersection(segment, anotherSegment);
+                    if (Double.compare(pointOfIntersection.getX(), minX) < 0) {
+                        minX = pointOfIntersection.getX();
+                    }
                     pointsOfIntersections.add(pointOfIntersection);
                 }
-            });
-            intersections.put(segment, pointsOfIntersections);
-        }
-
-        double minX = Double.MAX_VALUE;
-        for (Map.Entry<ISegment, Set<I2DPoint>> entry : intersections.entrySet()) {
-            I2DPoint minXPoint = entry.getValue().stream().min(Comparator.comparingDouble(I2DPoint::getX)).get();
-            if (Double.compare(minXPoint.getX(), minX) < 0) {
-                minX = minXPoint.getX();
             }
+            outerCount++;
+            intersections.put(segment, pointsOfIntersections);
         }
 
         Set<I2DPoint> result = new HashSet<>();
@@ -43,7 +45,7 @@ public class Task26Impl implements Task26 {
 
     }
 
-    private I2DPoint intersection(ISegment first, ISegment second) {
+    private I2DPoint getIntersection(ISegment first, ISegment second) {
 
         double x1 = first.first().getX();
         double y1 = first.first().getY();
@@ -59,8 +61,8 @@ public class Task26Impl implements Task26 {
         double a2 = (y4 - y3)/(x4 - x3);
         double b2 = (y3 * x4 - y4 * x3)/(x4 - x3);
 
-        double x = (b2 - b1)/(a2 - a1);
-        double y = (a1 * b2 - a2 * b1)/(a2 - a1);
+        double x = (b2 - b1)/(a1 - a2);
+        double y = (a1 * b2 - a2 * b1)/(a1 - a2);
 
         return new I2DPoint() {
             @Override
