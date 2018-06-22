@@ -56,13 +56,38 @@ public class Task26Impl implements Task26 {
         double x4 = second.second().getX();
         double y4 = second.second().getY();
 
-        double a1 = (y2 - y1)/(x2 - x1);
-        double b1 = (y1 * x2 - y2 * x1)/(x2 - x1);
-        double a2 = (y4 - y3)/(x4 - x3);
-        double b2 = (y3 * x4 - y4 * x3)/(x4 - x3);
+        double x;
+        double y;
 
-        double x = (b2 - b1)/(a1 - a2);
-        double y = (a1 * b2 - a2 * b1)/(a1 - a2);
+        if (x1 == x2) {
+
+            x = x1;
+
+            double a2 = (y4 - y3) / (x4 - x3);
+            double b2 = y3 - a2 * x3;
+
+            y = a2 * x + b2;
+
+        } else if (x3 == x4) {
+
+            x = x3;
+
+            double a1 = (y2 - y1) / (x2 - x1);
+            double b1 = y1 - a1 * x1;
+
+            y = a1 * x + b1;
+
+        } else {
+
+            double a1 = (y2 - y1) / (x2 - x1);
+            double b1 = y1 - a1 * x1;
+            double a2 = (y4 - y3) / (x4 - x3);
+            double b2 = y3 - a2 * x3;
+
+            x = (b2 - b1) / (a1 - a2);
+            y = (a1 * b2 - a2 * b1) / (a1 - a2);
+
+        }
 
         return new I2DPoint() {
             @Override
@@ -99,7 +124,7 @@ public class Task26Impl implements Task26 {
     }
 
     private double direction(I2DPoint p1, I2DPoint p2, I2DPoint p3) {
-        return (p3.getX() - p1.getX()) * (p2.getY() - p1.getY()) - (p3.getX() - p1.getX()) * (p2.getY() - p1.getY());
+        return (p3.getX() - p1.getX()) * (p2.getY() - p1.getY()) - (p2.getX() - p1.getX()) * (p3.getY() - p1.getY());
     }
 
     private boolean isPointOnSegment(ISegment segment, I2DPoint point) {
