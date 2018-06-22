@@ -59,7 +59,9 @@ public class Task7 {
         HashSet<Character> charsInCurrentWord = new HashSet<>();
         for (int i = 0; i < word.length(); i++) {
             char currentChar = word.toLowerCase().charAt(i);
-            charsInCurrentWord.add(currentChar);
+            if (currentChar >= 'a' && currentChar <= 'z' || currentChar >= 'A' && currentChar <= 'Z') {
+                charsInCurrentWord.add(currentChar);
+            }
         }
         return charsInCurrentWord.size() == word.length();
 
