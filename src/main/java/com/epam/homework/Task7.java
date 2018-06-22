@@ -1,9 +1,6 @@
 package com.epam.homework;
 
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class Task7 {
 
@@ -33,37 +30,31 @@ public class Task7 {
      * The is a
      */
     public static void main(String[] args) {
+        try (Scanner scanner = new Scanner(System.in)) {
+            Set<String> res = new HashSet<>();
+            int number = Integer.valueOf(scanner.nextLine());
+            String string = scanner.nextLine();
 
-        Scanner scanner = new Scanner(System.in);
-        int numberOfWords = scanner.nextInt();
-        Set<String> uniqueLetteredWords = new LinkedHashSet<>();
-
-        for (int i = 0; i < numberOfWords; i++) {
-            String currentWord = scanner.next();
-            if (isUniqueLatinLettered(currentWord)) {
-                uniqueLetteredWords.add(currentWord);
+            for (String word : string.split(" ", number)) {
+                if (checkWord(word.toLowerCase())) {
+                    res.add(word.toLowerCase());
+                }
             }
-        }
 
-        if (uniqueLetteredWords.isEmpty()) {
-            System.out.println("NOT FOUND");
-            return;
-        }
-        for (String word : uniqueLetteredWords) {
-            System.out.print(word + " ");
+            if (!res.isEmpty()) {
+                for (String word : res) {
+                    System.out.print(word + " ");
+                }
+            } else {
+                System.out.print("NOT FOUND");
+            }
         }
     }
 
-    private static boolean isUniqueLatinLettered(String word) {
+    private static boolean checkWord(String word) {
+        int count = new HashSet<>(Arrays.asList(word.split(""))).size();
 
-        HashSet<Character> charsInCurrentWord = new HashSet<>();
-        for (int i = 0; i < word.length(); i++) {
-            char currentChar = word.toLowerCase().charAt(i);
-            if (currentChar >= 'a' && currentChar <= 'z' || currentChar >= 'A' && currentChar <= 'Z') {
-                charsInCurrentWord.add(currentChar);
-            }
-        }
-        return charsInCurrentWord.size() == word.length();
-
+        return word.length() == count;
     }
 }
+
